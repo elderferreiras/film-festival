@@ -2,6 +2,8 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import HeaderButton from "../components/HeaderButton";
 import {HeaderButtons, Item} from "react-navigation-header-buttons";
+import { headerTitleStyle, headerStyle } from '../constants/HeaderStyle';
+import Colors from '../constants/Colors';
 
 const FestivalCalendarScreen = (props) => {
     return (
@@ -13,7 +15,10 @@ const FestivalCalendarScreen = (props) => {
 
 FestivalCalendarScreen.navigationOptions = (props) => {
     return {
-        headerTitle: 'Festival Calendar',
+        headerTitle: 'Calendar',
+        headerTintColor: Colors.white,
+        headerTitleStyle,
+        headerStyle,
         headerLeft: (
             <HeaderButtons HeaderButtonComponent={HeaderButton}>
                 <Item title="Menu" iconName="ios-menu" onPress={() => {
@@ -25,7 +30,9 @@ FestivalCalendarScreen.navigationOptions = (props) => {
             <HeaderButtons HeaderButtonComponent={HeaderButton}>
                 <Item
                     title="Filter"
-                    iconName="ios-options"
+                    iconName="ios-options" onPress={() => {
+                        props.navigation.navigate('CalendarFilter')
+                    }}
                 />
             </HeaderButtons>
         )

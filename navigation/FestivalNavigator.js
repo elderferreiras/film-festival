@@ -10,6 +10,7 @@ import NewsFeedScreen from '../screens/NewsFeedScreen';
 import FestivalCalendarScreen from '../screens/FestivalCalendarScreen';
 import FavoriteMoviesScreen from '../screens/FavoriteMoviesScreen';
 import MovieScreen from '../screens/MovieScreen';
+import CalendarFilterScreen from '../screens/CalendarFilterScreen';
 
 
 const configuration = {
@@ -18,12 +19,14 @@ const configuration = {
             backgroundColor: Platform.OS === 'android' ? Colors.primary : ''
         },
         headerTintColor: Platform.OS === 'android' ? 'white' : Colors.primary
-    }
+    },
+    headerLayoutPreset: 'center'
 };
 
 const CalendarNavigator = createStackNavigator({
     FestivalCalendar: FestivalCalendarScreen,
     MovieScreen: MovieScreen,
+    CalendarFilter: CalendarFilterScreen
 }, configuration);
 
 const FavoritesNavigator = createStackNavigator({
@@ -63,7 +66,7 @@ const tabScreenConfig = {
             tabBarIcon: (tabInfo) => {
                 return <Ionicons name='ios-star' size={25} color={tabInfo.tintColor}/>
             },
-            tabBarColor: Colors.accent
+            tabBarColor: Colors.primary
         }
     }
 };

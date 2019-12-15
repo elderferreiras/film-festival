@@ -2,6 +2,8 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import HeaderButton from "../components/HeaderButton";
+import { headerStyle, headerTitleStyle } from '../constants/HeaderStyle';
+import Colors from '../constants/Colors';
 
 const FavoriteMoviesScreen = (props) => {
     return (
@@ -13,7 +15,10 @@ const FavoriteMoviesScreen = (props) => {
 
 FavoriteMoviesScreen.navigationOptions = (props) => {
     return {
-        headerTitle: 'Your Favorites',
+        headerTitle: 'My Favorites',
+        headerTintColor: Colors.white,
+        headerTitleStyle,
+        headerStyle,
         headerLeft: (
             <HeaderButtons HeaderButtonComponent={HeaderButton}>
                 <Item title="Menu" iconName="ios-menu" onPress={() => {
