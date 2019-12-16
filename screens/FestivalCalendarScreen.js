@@ -6,6 +6,7 @@ import { headerTitleStyle, headerStyle } from '../constants/HeaderStyle';
 import Colors from '../constants/Colors';
 import { useDispatch, useSelector } from 'react-redux';
 import * as actionTypes from '../store/actions/events';
+import Event from '../components/Event';
 
 const FestivalCalendarScreen = (props) => {
     const events = useSelector(state => state.calendar.events);
@@ -17,8 +18,7 @@ const FestivalCalendarScreen = (props) => {
 
     return (
         <View style={styles.container}>
-            <Text>FestivalCalendarScreen</Text>
-            <Text>{events.length}</Text>
+            {events.map(event => <Event key={event.id} {...event}/>)}
         </View>
     );
 };
