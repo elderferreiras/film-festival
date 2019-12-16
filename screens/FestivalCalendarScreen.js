@@ -1,14 +1,24 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import HeaderButton from "../components/HeaderButton";
 import {HeaderButtons, Item} from "react-navigation-header-buttons";
 import { headerTitleStyle, headerStyle } from '../constants/HeaderStyle';
 import Colors from '../constants/Colors';
+import { useDispatch, useSelector } from 'react-redux';
+import * as actionTypes from '../store/actions/events';
 
 const FestivalCalendarScreen = (props) => {
+    const events = useSelector(state => state.calendar.events);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(actionTypes.loadEvents());
+    }, [dispatch]);
+
     return (
         <View style={styles.container}>
             <Text>FestivalCalendarScreen</Text>
+            <Text>{events.length}</Text>
         </View>
     );
 };
