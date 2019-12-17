@@ -64,7 +64,7 @@ const tabScreenConfig = {
         navigationOptions: {
             tabBarLabel: 'My Favorites',
             tabBarIcon: (tabInfo) => {
-                return <Ionicons name='ios-star' size={25} color={tabInfo.tintColor}/>
+                return <Ionicons name='ios-heart' size={25} color={tabInfo.tintColor}/>
             },
             tabBarColor: Colors.primary
         }
@@ -73,12 +73,12 @@ const tabScreenConfig = {
 
 const FestivalTabNavigator = Platform.OS === 'android' ?
     createMaterialBottomTabNavigator(tabScreenConfig, {
-        activeTintColor: 'white',
+        activeTintColor: Colors.secondary,
         shifting: true
     }) :
     createBottomTabNavigator(tabScreenConfig, {
         tabBarOptions: {
-            activeTintColor: Colors.accent
+            activeTintColor: Colors.secondary
         }
     });
 
@@ -91,7 +91,7 @@ const MainNavigator = createDrawerNavigator({
     }
 }, {
     contentOptions: {
-        activeTintColor: Colors.accent,
+        activeTintColor: Colors.tertiary,
     }
 });
 

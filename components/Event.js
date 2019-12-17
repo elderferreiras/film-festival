@@ -6,12 +6,12 @@ import {
     TouchableOpacity,
     TouchableNativeFeedback,
     Platform,
-    StyleSheet,
-    Button
+    StyleSheet
 } from 'react-native';
 import { cdnUrl } from '../environment/env';
 import Colors from '../constants/Colors';
 import { Ionicons } from '@expo/vector-icons';
+import {getShortDate} from "../utility";
 
 const Event = (props) => {
     let TouchableComponent = TouchableOpacity;
@@ -20,19 +20,25 @@ const Event = (props) => {
         TouchableComponent = TouchableNativeFeedback;
     }
 
+    const noPosterStyle = {
+        width: `${props.poster? '60%' : '80%'}`,
+        paddingLeft: props.poster? 0 : 18
+    };
+
     return (
         <View style={styles.grid}>
             <TouchableComponent style={styles.touchableComponent} onPress={props.pressed}>
                 <View style={styles.container}>
                     <View style={styles.time}>
                         <Text style={styles.text}>{props.time}</Text>
+                        <Text style={styles.dateText}>{getShortDate(props.date)}</Text>
                     </View>
-                    <View style={styles.poster}>
+                    {props.poster? <View style={styles.poster}>
                         <Image
                             source={{uri: cdnUrl + props.poster}}
                             style={{width: 50, height: 70}}/>
-                    </View>
-                    <View style={styles.rightGrid}>
+                    </View> : null }
+                    <View style={{...styles.rightGrid, ...noPosterStyle}}>
                         <View style={styles.details}>
                             <Text style={{...styles.text, ...styles.title}}>{props.title}</Text>
                             <Text style={styles.text}>{[props.category, `${props.runningTime} min`].join(' | ')} </Text>
@@ -76,12 +82,12 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
         alignItems: 'flex-start',
         borderBottomWidth: 3,
-        borderBottomColor: Colors.accent
+        borderBottomColor: Colors.tertiary
     },
     time: {
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: Colors.accent,
+        backgroundColor: Colors.tertiary,
         width: "20%",
         height: "100%",
         paddingTop: 5,
@@ -101,6 +107,11 @@ const styles = StyleSheet.create({
     },
     text: {
         color: Colors.white
+    },
+    dateText: {
+        paddingTop: 5,
+        color: Colors.accent,
+        fontWeight: 'bold'
     },
     title: {
         fontSize: 16
