@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, FlatList, SafeAreaView } from 'react-native';
 import HeaderButton from "../components/HeaderButton";
 import {HeaderButtons, Item} from "react-navigation-header-buttons";
 import { headerTitleStyle, headerStyle } from '../constants/HeaderStyle';
@@ -7,6 +7,7 @@ import Colors from '../constants/Colors';
 import { useDispatch, useSelector } from 'react-redux';
 import * as actionTypes from '../store/actions/events';
 import Event from '../components/Event';
+import Constants from 'expo-constants';
 
 const FestivalCalendarScreen = (props) => {
     const events = useSelector(state => state.calendar.events);
@@ -16,16 +17,29 @@ const FestivalCalendarScreen = (props) => {
         dispatch(actionTypes.loadEvents());
     }, [dispatch]);
 
+    const onPressedEvent = (id, title) => {
+        props.navigation.navigate({
+            routeName: 'MovieScreen', params: {
+                id,
+                title
+            }
+        });
+    };
+
     return (
-        <View style={styles.container}>
-            {events.map(event => <Event key={event.id} {...event}/>)}
-        </View>
+        <SafeAreaView style={styles.container}>
+            <FlatList
+                data={events}
+                renderItem={({ item }) => <Event {...item} pressed={() => onPressedEvent(item.id, item.title)}/>}
+                keyExtractor={item => item.id}
+            />
+        </SafeAreaView>
     );
 };
 
 FestivalCalendarScreen.navigationOptions = (props) => {
     return {
-        headerTitle: 'Calendar',
+        headerTitle: 'FESTIVAL SCHEDULE',
         headerTintColor: Colors.white,
         headerTitleStyle,
         headerStyle,
@@ -51,10 +65,7 @@ FestivalCalendarScreen.navigationOptions = (props) => {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
+        flex: 1
     },
 });
 
