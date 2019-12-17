@@ -1,5 +1,7 @@
 # MINT Film Festival
 
+The MINT Film Festival is an open source project that aims to create a mobile experience for the MINT Festival goers. 
+
 # Installation
 
 This project has been designed with the use of Expo and React Native. You will need Node.js to be installed in your machine to be able to run this project.
