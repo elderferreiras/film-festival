@@ -2,6 +2,8 @@ import React, {useEffect} from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import * as actionTypes from '../store/actions/event';
+import Colors from "../constants/Colors";
+import {headerStyle, headerTitleStyle} from "../constants/HeaderStyle";
 
 const MovieScreen = (props) => {
     const id = props.navigation.getParam('id');
@@ -21,7 +23,10 @@ const MovieScreen = (props) => {
 
 MovieScreen.navigationOptions = (props) => {
     return {
-        headerTitle: props.navigation.getParam('title')
+        headerTitle: props.navigation.getParam('title'),
+        headerTintColor: Colors.white,
+        headerTitleStyle,
+        headerStyle
     };
 };
 

@@ -12,6 +12,7 @@ import { cdnUrl } from '../environment/env';
 import Colors from '../constants/Colors';
 import { Ionicons } from '@expo/vector-icons';
 import {getShortDate} from "../utility";
+import DefaultText from "./DefaultText";
 
 const Event = (props) => {
     let TouchableComponent = TouchableOpacity;
@@ -20,9 +21,13 @@ const Event = (props) => {
         TouchableComponent = TouchableNativeFeedback;
     }
 
+    const noPosterPaddingStyle = {
+        paddingLeft: props.poster? 0 : 18
+    };
+
     const noPosterStyle = {
         width: `${props.poster? '60%' : '80%'}`,
-        paddingLeft: props.poster? 0 : 18
+        ...noPosterPaddingStyle
     };
 
     return (
@@ -30,8 +35,8 @@ const Event = (props) => {
             <TouchableComponent style={styles.touchableComponent} onPress={props.pressed}>
                 <View style={styles.container}>
                     <View style={styles.time}>
-                        <Text style={styles.text}>{props.time}</Text>
-                        <Text style={styles.dateText}>{getShortDate(props.date)}</Text>
+                        <DefaultText style={styles.text}>{props.time}</DefaultText>
+                        <DefaultText style={styles.dateText}>{getShortDate(props.date)}</DefaultText>
                     </View>
                     {props.poster? <View style={styles.poster}>
                         <Image
@@ -40,11 +45,11 @@ const Event = (props) => {
                     </View> : null }
                     <View style={{...styles.rightGrid, ...noPosterStyle}}>
                         <View style={styles.details}>
-                            <Text style={{...styles.text, ...styles.title}}>{props.title}</Text>
-                            <Text style={styles.text}>{[props.category, `${props.runningTime} min`].join(' | ')} </Text>
-                            <Text style={{...styles.text, color: Colors.secondary}}>{props.venue.title}</Text>
+                            <DefaultText style={{...styles.text, ...styles.title}}>{props.title}</DefaultText>
+                            <DefaultText style={styles.text}>{[props.category, `${props.runningTime} min`].join(' | ')} </DefaultText>
+                             <DefaultText style={{...styles.text, color: Colors.secondary}}><Ionicons name="ios-pin" size={14} color={Colors.secondary} /> {props.venue.title}</DefaultText>
                         </View>
-                        <View style={styles.buttonGrid}>
+                        <View style={{...styles.buttonGrid,...noPosterPaddingStyle}}>
                             <TouchableOpacity style={styles.button}>
                                 <View>
                                     <Ionicons name="md-heart-empty" size={32} color={Colors.secondary} />

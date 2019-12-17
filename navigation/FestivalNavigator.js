@@ -52,7 +52,7 @@ const tabScreenConfig = {
     Calendar: {
         screen: CalendarNavigator,
         navigationOptions: {
-            tabBarLabel: 'Festival Calendar',
+            tabBarLabel: 'Festival Schedule',
             tabBarIcon: (tabInfo) => {
                 return <Ionicons name='ios-calendar' size={25} color={tabInfo.tintColor}/>
             },
@@ -83,16 +83,23 @@ const FestivalTabNavigator = Platform.OS === 'android' ?
     });
 
 const MainNavigator = createDrawerNavigator({
-    FilmFestival: {
+    Home: {
         screen: FestivalTabNavigator,
         navigationOptions: {
-            drawerLabel: 'Film Festival'
+            drawerLabel: 'Home',
+        }
+    },
+    Info: {
+        screen: CalendarNavigator,
+        navigationOptions: {
+            drawerLabel: 'Info',
         }
     }
 }, {
     contentOptions: {
-        activeTintColor: Colors.tertiary,
-    }
+        activeTintColor: Colors.white
+    },
+    drawerBackgroundColor: Colors.secondary
 });
 
 export default createAppContainer(MainNavigator);

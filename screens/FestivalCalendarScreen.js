@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {StyleSheet, SectionList, SafeAreaView, Text, View} from 'react-native';
+import {StyleSheet, SectionList, SafeAreaView, Text, View, ActivityIndicator} from 'react-native';
 import HeaderButton from "../components/HeaderButton";
 import {HeaderButtons, Item} from "react-navigation-header-buttons";
 import {headerTitleStyle, headerStyle} from '../constants/HeaderStyle';
@@ -8,9 +8,11 @@ import {useDispatch, useSelector} from 'react-redux';
 import * as actionTypes from '../store/actions/events';
 import Event from '../components/Event';
 import {getLongDate} from "../utility";
+import DefaultText from "../components/DefaultText";
 
 const FestivalCalendarScreen = (props) => {
 	const events = useSelector(state => state.calendar.events);
+	const loading = useSelector(state => state.calendar.loading);
 	const dispatch = useDispatch();
 
 	useEffect(() => {
@@ -42,24 +44,28 @@ const FestivalCalendarScreen = (props) => {
 		});
 	};
 
+	const activityIndicator =  <View style={[styles.activityIndicatorContainer, styles.horizontal]}>
+		<ActivityIndicator size="large" color={Colors.secondary} />
+	</View>;
+
 	return (
 		<SafeAreaView style={styles.container}>
-			<SectionList
+			{loading? activityIndicator : <SectionList
 				sections={groupArrays}
 				keyExtractor={(item, index) => item.id + index}
 				renderItem={({item}) => <Event {...item} pressed={() => onPressedEvent(item.id, item.title)}/>}
 				renderSectionHeader={({section: {title}}) => (
 					<View style={styles.header}>
 						<View style={styles.headerLeft}>
-							<Text style={styles.text}>{title.split(',').shift()}</Text>
+							<DefaultText style={styles.text}>{title.split(',').shift()}</DefaultText>
 						</View>
 
 						<View style={styles.headerRight}>
-							<Text style={styles.text}>{title.split(',').pop()}</Text>
+							<DefaultText style={styles.text}>{title.split(',').pop()}</DefaultText>
 						</View>
 					</View>
 				)}
-			/>
+			/> }
 		</SafeAreaView>
 	);
 };
@@ -94,12 +100,21 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1
 	},
+	activityIndicatorContainer: {
+		flex: 1,
+		justifyContent: 'center'
+	},
+	horizontal: {
+		flexDirection: 'row',
+		justifyContent: 'space-around',
+		padding: 10
+	},
 	header: {
 		flex: 1,
 		flexDirection: "row",
 		backgroundColor: Colors.secondary,
-		paddingTop: 8,
-		paddingBottom: 8
+		paddingTop: 4,
+		paddingBottom: 4
 	},
 	headerTextLeft: {
 		flexDirection: "row",
