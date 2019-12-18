@@ -11,6 +11,7 @@ import FestivalCalendarScreen from '../screens/FestivalCalendarScreen';
 import FavoriteMoviesScreen from '../screens/FavoriteMoviesScreen';
 import MovieScreen from '../screens/MovieScreen';
 import CalendarFilterScreen from '../screens/CalendarFilterScreen';
+import MovieBlockScreen from '../screens/MovieBlockScreen';
 
 
 const configuration = {
@@ -25,6 +26,7 @@ const configuration = {
 
 const CalendarNavigator = createStackNavigator({
     FestivalCalendar: FestivalCalendarScreen,
+    BlockScreen: MovieBlockScreen,
     MovieScreen: MovieScreen,
     CalendarFilter: CalendarFilterScreen
 }, configuration);

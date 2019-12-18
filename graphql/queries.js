@@ -1,4 +1,4 @@
-import ApolloClient, { gql } from 'apollo-boost';
+import { gql } from 'apollo-boost';
 
 export const listEvents = gql`query {
     events {
@@ -15,6 +15,31 @@ export const listEvents = gql`query {
         year
         city
         country
+        venue {
+            title
+            address
+            city
+        }
+    }
+}
+`;
+
+export const getCalendar = gql`query {
+    calendar {
+        id
+        title
+        subtitle
+        description
+        directedBy
+        category
+        runningTime
+        poster
+        time
+        date
+        year
+        city
+        country
+        type
         venue {
             title
             address
@@ -44,6 +69,35 @@ export const getEvent = gql`
                 title
                 address
                 city
+                latitude
+                longitude
+            }
+            awards {
+                id
+                title
+                award
+            }
+            events {
+                id
+                title
+                subtitle
+                description
+                directedBy
+                category
+                runningTime
+                poster
+                time
+                date
+                year
+                city
+                country
+                venue {
+                    title
+                    address
+                    city
+                    latitude
+                    longitude
+                }
             }
         }
     }

@@ -35,13 +35,25 @@ const FestivalCalendarScreen = (props) => {
 		};
 	});
 
-	const onPressedEvent = (id, title) => {
-		props.navigation.navigate({
-			routeName: 'MovieScreen', params: {
-				id,
-				title
-			}
-		});
+	const onPressedEvent = (id, title, type) => {
+		switch(type) {
+			case 'BLOCK':
+				props.navigation.navigate({
+					routeName: 'BlockScreen', params: {
+						id,
+						title
+					}
+				});
+				break;
+			case 'FILM':
+			default:
+				props.navigation.navigate({
+					routeName: 'MovieScreen', params: {
+						id,
+						title
+					}
+				});
+		}
 	};
 
 	const activityIndicator =  <View style={[styles.activityIndicatorContainer, styles.horizontal]}>
@@ -53,7 +65,7 @@ const FestivalCalendarScreen = (props) => {
 			{loading? activityIndicator : <SectionList
 				sections={groupArrays}
 				keyExtractor={(item, index) => item.id + index}
-				renderItem={({item}) => <Event {...item} pressed={() => onPressedEvent(item.id, item.title)}/>}
+				renderItem={({item}) => <Event {...item} pressed={(type) => onPressedEvent(item.id, item.title, type)}/>}
 				renderSectionHeader={({section: {title}}) => (
 					<View style={styles.header}>
 						<View style={styles.headerLeft}>

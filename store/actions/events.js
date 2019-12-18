@@ -26,9 +26,9 @@ export const loadEvents = () => {
     return dispatch => {
         dispatch(fetchEventsStart());
 
-        client.query({query: queries.listEvents}).then(response => {
-           if (response.data && response.data.events) {
-               dispatch(fetchEventsSuccess(response.data.events));
+        client.query({query: queries.getCalendar}).then(response => {
+           if (response.data && response.data.calendar) {
+               dispatch(fetchEventsSuccess(response.data.calendar));
            }
         }).catch(err => {
             dispatch(fetchEventsFail(err));

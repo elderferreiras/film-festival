@@ -32,7 +32,7 @@ const Event = (props) => {
 
     return (
         <View style={styles.grid}>
-            <TouchableComponent style={styles.touchableComponent} onPress={props.pressed}>
+            <TouchableComponent style={styles.touchableComponent} onPress={() => props.pressed(props.type)}>
                 <View style={styles.container}>
                     <View style={styles.time}>
                         <DefaultText style={styles.text}>{props.time}</DefaultText>
@@ -47,7 +47,7 @@ const Event = (props) => {
                         <View style={styles.details}>
                             <DefaultText style={{...styles.text, ...styles.title}}>{props.title}</DefaultText>
                             <DefaultText style={styles.text}>{[props.category, `${props.runningTime} min`].join(' | ')} </DefaultText>
-                             <DefaultText style={{...styles.text, color: Colors.secondary}}><Ionicons name="ios-pin" size={14} color={Colors.secondary} /> {props.venue.title}</DefaultText>
+                             <DefaultText style={{...styles.text, color: Colors.secondary}}><Ionicons name="ios-pin" size={14} color={Colors.secondary} /> {props.venue? props.venue.title : props.id}</DefaultText>
                         </View>
                         <View style={{...styles.buttonGrid,...noPosterPaddingStyle}}>
                             <TouchableOpacity style={styles.button}>

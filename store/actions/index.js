@@ -9,3 +9,10 @@ export {
     FETCH_EVENT_SUCCESS,
     FETCH_EVENT_START
 } from './types';
+
+
+export {
+    FETCH_BLOCK_FAIL,
+    FETCH_BLOCK_SUCCESS,
+    FETCH_BLOCK_START
+} from './types';

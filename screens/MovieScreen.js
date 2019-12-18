@@ -17,6 +17,7 @@ const MovieScreen = (props) => {
     return (
         <View style={styles.container}>
             <Text>{event? event.title : ''}</Text>
+            <Text>{event? event.description : ''}</Text>
         </View>
     );
 };
