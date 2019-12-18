@@ -6,6 +6,7 @@ import {HeaderButtons, Item} from 'react-navigation-header-buttons';
 import Colors from "../constants/Colors";
 import {headerStyle, headerTitleStyle} from "../constants/HeaderStyle";
 import HeaderButton from '../components/HeaderButton';
+import { addFavorite, isFavorite,deleteFavorite } from '../store/actions/favorites';
 
 const MovieScreen = (props) => {
     const id = props.navigation.getParam('id');
@@ -13,22 +14,45 @@ const MovieScreen = (props) => {
     const event = useSelector(state => state.event.event);
 
     useEffect(() => {
-        dispatch(actionTypes.loadEvent(id));
-    }, [dispatch, id]);
-
-    const toggleFavoriteHandler = useCallback(() => {
-        //dispatch(toggleFavorite(id));
-    }, [dispatch, id]);
-
-    useEffect(() => {
         props.navigation.setParams({toggleFav: toggleFavoriteHandler});
     }, [toggleFavoriteHandler]);
 
 
     useEffect(() => {
-        props.navigation.setParams({isFav: true});
-    }, []);
+        async function checkIfFavorite() {
+            return await isFavorite(id);
+        }
 
+        checkIfFavorite().then((data) => {
+            props.navigation.setParams({isFav: !!data.rows._array.length});
+        });
+    }, [id]);  useEffect(() => {
+        dispatch(actionTypes.loadEvent(id));
+    }, [dispatch, id]);
+
+    const toggleFavoriteHandler = useCallback(() => {
+        async function addFav(isFav) {
+            if (!isFav) {
+                console.log('addFavorite');
+                return await addFavorite(id);
+            } else {
+                console.log('deleteFavorite');
+                return await deleteFavorite(id);
+            }
+        }
+
+        async function checkIfFavorite() {
+            return await isFavorite(id);
+        }
+
+        checkIfFavorite().then((__) => {
+            addFav(!!__.rows._array.length).then((_) => {
+                checkIfFavorite().then((data) => {
+                    props.navigation.setParams({isFav: !!data.rows._array.length});
+                });
+            });
+        });
+    }, [id]);
 
     return (
         <View style={styles.container}>

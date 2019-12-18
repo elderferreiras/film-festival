@@ -7,12 +7,22 @@ import thunk from 'redux-thunk';
 import eventsReducer from './store/reducers/events';
 import eventReducer from './store/reducers/event';
 import blockReducer from './store/reducers/block';
+import favoritesReducer from './store/reducers/favorites';
 import * as Font from 'expo-font';
+import { init } from './helpers/db';
+
+init().then(() => {
+    console.log('Database: initialized.');
+}).catch(err => {
+    console.log('Database initialization failed.');
+    console.log(err);
+});
 
 const rootReducer = combineReducers({
     calendar: eventsReducer,
     event: eventReducer,
-    block: blockReducer
+    block: blockReducer,
+    favorites: favoritesReducer
 });
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
