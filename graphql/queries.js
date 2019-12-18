@@ -10,6 +10,7 @@ export const listEvents = gql`query {
         category
         runningTime
         poster
+        tickets
         time
         date
         year
@@ -34,6 +35,7 @@ export const getCalendar = gql`query {
         category
         runningTime
         poster
+        tickets
         time
         date
         year
@@ -60,6 +62,7 @@ export const getEvent = gql`
             category
             runningTime
             poster
+            tickets
             time
             date
             year
@@ -86,6 +89,7 @@ export const getEvent = gql`
                 category
                 runningTime
                 poster
+                tickets
                 time
                 date
                 year

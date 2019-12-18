@@ -1,13 +1,15 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, ImageBackground } from 'react-native';
 import DefaultText from './DefaultText';
 import Colors from '../constants/Colors';
 
 const BlockSummary = props => {
     return (
         <View style={styles.container}>
-                <DefaultText style={styles.subtitle}>{props.subtitle}</DefaultText>
+            <View style={styles.information}>
                 <DefaultText style={styles.description}>{props.description}</DefaultText>
+                <DefaultText style={styles.subtitle}>{props.subtitle}</DefaultText>
+            </View>
         </View>
     );
 };
@@ -15,27 +17,29 @@ const BlockSummary = props => {
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: Colors.secondary,
+        backgroundColor: Colors.accent,
         alignItems: 'center',
         justifyContent: 'center',
     },
-    title: {
-        color: Colors.white,
-        margin: 10,
-        fontSize: 24,
-        fontWeight: 'bold'
+    information: {
+        marginTop: 2,
+        marginBottom: 2,
+        padding: 10,
+        backgroundColor: Colors.primary
     },
     subtitle: {
-        color: Colors.white,
-        margin: 10,
-        fontSize: 16,
-        fontStyle: 'italic'
+        color: Colors.secondary,
+        marginTop: 10,
+        marginBottom: 10,
+        fontSize: 14,
+        fontStyle: 'italic',
+        textAlign: 'center'
     },
     description: {
         color: Colors.white,
-        margin: 10,
+        marginTop: 5,
         fontSize: 16,
-        textAlign: 'center'
+        textAlign: 'justify'
     },
 });
 

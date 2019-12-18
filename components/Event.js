@@ -1,7 +1,7 @@
 import React from 'react';
 import {
     View,
-    Text,
+    Linking,
     Image,
     TouchableOpacity,
     TouchableNativeFeedback,
@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import { cdnUrl } from '../environment/env';
 import Colors from '../constants/Colors';
-import { Ionicons } from '@expo/vector-icons';
+import { FontAwesome } from '@expo/vector-icons';
 import {getShortDate} from "../utility";
 import DefaultText from "./DefaultText";
 
@@ -20,6 +20,16 @@ const Event = (props) => {
     if (Platform.OS === 'android' && Platform.Version >= 21) {
         TouchableComponent = TouchableNativeFeedback;
     }
+
+    const onClickBuyTicket = (url) => {
+        Linking.canOpenURL(url).then(supported => {
+            if (supported) {
+                Linking.openURL(url);
+            } else {
+                console.log("Don't know how to open URI: " + url);
+            }
+        });
+    };
 
     const noPosterPaddingStyle = {
         paddingLeft: props.poster? 0 : 18
@@ -47,12 +57,12 @@ const Event = (props) => {
                         <View style={styles.details}>
                             <DefaultText style={{...styles.text, ...styles.title}}>{props.title}</DefaultText>
                             <DefaultText style={styles.text}>{[props.category, `${props.runningTime} min`].join(' | ')} </DefaultText>
-                             <DefaultText style={{...styles.text, color: Colors.secondary}}><Ionicons name="ios-pin" size={14} color={Colors.secondary} /> {props.venue? props.venue.title : props.id}</DefaultText>
+                             <DefaultText style={{...styles.text, color: Colors.secondary}}><FontAwesome name="map-marker" size={14} color={Colors.secondary} /> {props.venue? props.venue.title : props.id}</DefaultText>
                         </View>
                         <View style={{...styles.buttonGrid,...noPosterPaddingStyle}}>
-                            <TouchableOpacity style={styles.button}>
+                            <TouchableOpacity style={styles.button} onPress={() => onClickBuyTicket(props.tickets)}>
                                 <View>
-                                    <Ionicons name="md-heart-empty" size={32} color={Colors.secondary} />
+                                    <FontAwesome name="ticket" size={32} color={Colors.secondary} />
                                 </View>
                             </TouchableOpacity>
                         </View>
