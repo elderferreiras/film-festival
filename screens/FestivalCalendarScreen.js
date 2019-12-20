@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import {StyleSheet, SectionList, SafeAreaView, Text, View, ActivityIndicator} from 'react-native';
-import HeaderButton from "../components/HeaderButton";
+import HeaderButton from "../components/UI/HeaderButton";
 import {HeaderButtons, Item} from "react-navigation-header-buttons";
 import {headerTitleStyle, headerStyle} from '../constants/HeaderStyle';
 import Colors from '../constants/Colors';
@@ -8,7 +8,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import * as actionTypes from '../store/actions/events';
 import Event from '../components/Event';
 import {getLongDate} from "../utility";
-import DefaultText from "../components/DefaultText";
+import DefaultText from "../components/UI/DefaultText";
 
 const FestivalCalendarScreen = (props) => {
 	const events = useSelector(state => state.calendar.events);
@@ -41,16 +41,20 @@ const FestivalCalendarScreen = (props) => {
 				props.navigation.navigate({
 					routeName: 'BlockScreen', params: {
 						id,
-						title
+						title,
+						event: true,
+						type
 					}
 				});
 				break;
 			case 'FILM':
 			default:
 				props.navigation.navigate({
-					routeName: 'MovieScreen', params: {
+					routeName: 'EventScreen', params: {
 						id,
-						title
+						title,
+						event: true,
+						type
 					}
 				});
 		}

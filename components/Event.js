@@ -12,7 +12,7 @@ import { cdnUrl } from '../environment/env';
 import Colors from '../constants/Colors';
 import { FontAwesome } from '@expo/vector-icons';
 import {getShortDate} from "../utility";
-import DefaultText from "./DefaultText";
+import DefaultText from "./UI/DefaultText";
 
 const Event = (props) => {
     let TouchableComponent = TouchableOpacity;
@@ -40,6 +40,16 @@ const Event = (props) => {
         ...noPosterPaddingStyle
     };
 
+    let poster = null;
+
+    if (props.poster) {
+        poster = <View style={styles.poster}>
+            <Image
+                source={{uri: cdnUrl + props.poster}}
+                style={{width: 50, height: 70}}/>
+        </View>;
+    }
+
     return (
         <View style={styles.grid}>
             <TouchableComponent style={styles.touchableComponent} onPress={() => props.pressed(props.type)}>
@@ -48,15 +58,11 @@ const Event = (props) => {
                         <DefaultText style={styles.text}>{props.time}</DefaultText>
                         <DefaultText style={styles.dateText}>{getShortDate(props.date)}</DefaultText>
                     </View>
-                    {props.poster? <View style={styles.poster}>
-                        <Image
-                            source={{uri: cdnUrl + props.poster}}
-                            style={{width: 50, height: 70}}/>
-                    </View> : null }
+                    {poster}
                     <View style={{...styles.rightGrid, ...noPosterStyle}}>
                         <View style={styles.details}>
                             <DefaultText style={{...styles.text, ...styles.title}}>{props.title}</DefaultText>
-                            <DefaultText style={styles.text}>{[props.category, `${props.runningTime} min`].join(' | ')} </DefaultText>
+                            <DefaultText style={styles.text}>{props.runningTime} min</DefaultText>
                              <DefaultText style={{...styles.text, color: Colors.secondary}}><FontAwesome name="map-marker" size={14} color={Colors.secondary} /> {props.venue? props.venue.title : props.id}</DefaultText>
                         </View>
                         <View style={{...styles.buttonGrid,...noPosterPaddingStyle}}>

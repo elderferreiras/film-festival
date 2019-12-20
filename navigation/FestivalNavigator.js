@@ -5,13 +5,13 @@ import { createMaterialBottomTabNavigator } from "react-navigation-material-bott
 import { createDrawerNavigator } from 'react-navigation-drawer';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import Colors from "../constants/Colors";
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import NewsFeedScreen from '../screens/NewsFeedScreen';
 import FestivalCalendarScreen from '../screens/FestivalCalendarScreen';
 import FavoriteMoviesScreen from '../screens/FavoriteMoviesScreen';
-import MovieScreen from '../screens/MovieScreen';
 import CalendarFilterScreen from '../screens/CalendarFilterScreen';
-import MovieBlockScreen from '../screens/MovieBlockScreen';
+import FestivalPassesScreen from '../screens/FestivalPassesScreen';
+import EventScreen from '../screens/EventScreen';
 
 
 const configuration = {
@@ -26,18 +26,22 @@ const configuration = {
 
 const CalendarNavigator = createStackNavigator({
     FestivalCalendar: FestivalCalendarScreen,
-    BlockScreen: MovieBlockScreen,
-    MovieScreen: MovieScreen,
-    CalendarFilter: CalendarFilterScreen
+    EventScreen: EventScreen,
+    BlockScreen: EventScreen,
+    CalendarFilter: CalendarFilterScreen,
 }, configuration);
 
 const FavoritesNavigator = createStackNavigator({
     Favorites: FavoriteMoviesScreen,
-    MovieScreen: MovieScreen,
+    EventScreen: EventScreen
 }, configuration);
 
 const NewsFeedNavigator = createStackNavigator({
     NewsFeed: NewsFeedScreen
+}, configuration);
+
+const FestivalPassesNavigator = createStackNavigator({
+    FestivalPassesScreen: FestivalPassesScreen
 }, configuration);
 
 const tabScreenConfig = {
@@ -57,6 +61,16 @@ const tabScreenConfig = {
             tabBarLabel: 'Festival Schedule',
             tabBarIcon: (tabInfo) => {
                 return <Ionicons name='ios-calendar' size={25} color={tabInfo.tintColor}/>
+            },
+            tabBarColor: Colors.primary
+        }
+    },
+    FestivalPasses: {
+        screen: FestivalPassesNavigator,
+        navigationOptions: {
+            tabBarLabel: 'Festival Passes',
+            tabBarIcon: (tabInfo) => {
+                return <MaterialCommunityIcons name='ticket' size={25} color={tabInfo.tintColor}/>
             },
             tabBarColor: Colors.primary
         }

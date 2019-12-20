@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, StyleSheet, ImageBackground } from 'react-native';
-import DefaultText from './DefaultText';
-import Colors from '../constants/Colors';
+import DefaultText from '../UI/DefaultText';
+import Colors from '../../constants/Colors';
 
 const BlockSummary = props => {
     return (

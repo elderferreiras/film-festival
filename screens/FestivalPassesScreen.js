@@ -5,17 +5,17 @@ import HeaderButton from "../components/UI/HeaderButton";
 import { headerTitleStyle, headerStyle } from '../constants/HeaderStyle';
 import Colors from '../constants/Colors';
 
-const NewsFeedScreen = (props) => {
+const FestivalPassesScreen = (props) => {
     return (
         <View style={styles.container}>
-            <Text>NewsFeedScreen</Text>
+            <Text>FestivalPassesScreen</Text>
         </View>
     );
 };
 
-NewsFeedScreen.navigationOptions  = (props) => {
+FestivalPassesScreen.navigationOptions  = (props) => {
     return {
-        headerTitle: 'MINT',
+        headerTitle: 'FestivalPassesScreen',
         headerTintColor: Colors.white,
         headerStyle,
         headerTitleStyle,
@@ -38,4 +38,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default NewsFeedScreen;
+export default FestivalPassesScreen;

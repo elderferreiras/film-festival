@@ -68,6 +68,7 @@ export const getEvent = gql`
             year
             city
             country
+            type
             venue {
                 title
                 address
@@ -95,6 +96,7 @@ export const getEvent = gql`
                 year
                 city
                 country
+                type
                 venue {
                     title
                     address
